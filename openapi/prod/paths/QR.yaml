@@ -1,0 +1,27 @@
+paths:
+  TinkoffPay@{paymentId}@QR:
+    get:
+      deprecated: true
+      tags:
+        - Методы оплаты по QR
+      summary: QR
+      description: |
+         Метод получение QR для десктопов
+      parameters:
+        - in: paths
+          name: paymentId
+          schema:
+            type: number
+            example: 700001702044
+          required: true
+          description: |
+            Уникальный идентификатор транзакции в
+            системе Банка
+      responses: 
+        '200':
+          description: OK
+          content: 
+            image/svg:
+              schema:
+                type: string
+                format: binary

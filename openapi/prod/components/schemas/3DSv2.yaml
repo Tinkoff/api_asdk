@@ -1,0 +1,131 @@
+type: object
+required: 
+  - threeDSCompInd
+  - language
+  - timezone
+  - screen_height
+  - screen_width
+  - cresCallbackUr
+  - sdkAppID
+  - sdkEncData
+  - sdkEphemPubKey
+  - sdkMaxTimeout
+  - sdkReferenceNumber
+  - sdkTransID
+  - sdkInterface
+  - sdkUiType
+properties: 
+  threeDSCompInd:
+    type: string
+    description: |
+      Идентификатор выполнения 3DS Method:
+      * 'Y' - выполнение метода успешно завершено
+      * 'N' - выполнение метода завершено неуспешно 
+      или метод не выполнялся
+  language:
+    type: string
+    description: |
+      Язык браузера по формату IETF BCP47.
+      Рекомендация по получению значения в браузере 
+      (из глобального объекта navigator):
+      navigator.language
+  timezone:
+    type: string
+    description: |
+      Time-zone пользователя.
+      Рекомендация по получению значения в браузере: 
+      вызов метода getTimezoneOffset()
+    example: 'UTC +5 hours: -300'
+  screen_height:
+    type: string
+    description: |
+      Высота экрана в пикселях.
+      Рекомендация по получению значения в браузере 
+      (из глобального объекта screen):
+      screen.height
+  screen_width:
+    type: string
+    description: |
+      Ширина экрана в пикселях.
+      Рекомендация по получению значения в браузере 
+      (из глобального объекта screen):
+      screen.width
+  cresCallbackUrl:
+    type: string
+    description: |
+      URL который будет использоваться для получения
+      результата (CRES) после завершения Challenge
+      Flow (аутентификаци с дополнительным переходом 
+      на страницу ACS)
+  sdkAppID:
+    type: string
+    description: |
+      Уникальный идентификатор приложения 3DS Requestor,
+      который формируется 3DS SDK при каждой установке или
+      обновлении приложения.
+  sdkEncData:
+    type: string
+    description: |
+      Данные, собранные SDK.
+      JWE объект, полученный от 3DS SDK.
+      Должен быть дополнительно закодирован в base64 строку.
+  sdkEphemPubKey:
+    type: string
+    description: |
+      Компонент public key пары ephemeral key, сгенерированный
+      3DS SDK. JWE объект, полученный от 3DS SDK, должен быть 
+      дополнительно закодирован в base64 строку.
+  sdkMaxTimeout:
+    type: string
+    description: |
+     Максимальное количество времени (в минутах)
+    minLength: 5
+  sdkReferenceNumber:
+    type: string
+    description: |
+      Поставщик и версия 3DS SDK
+  sdkTransID:
+    type: string
+    description: |
+      Уникальный идентификатор транзакции, назначенный 3DS SDK
+      для идентификации одной транзакции
+  sdkInterface:
+    type: string
+    description: |
+      Список поддерживаемых интерфейсов SDK.
+      Поддерживаемые значения:
+      * 01 = Native
+      * 02 = HTML
+      * 03 = Both
+  sdkUiType:
+    type: string
+    description: |
+      Список поддерживаемых типов UI.
+      Значения для каждого интерфейса:
+      * Native UI = 01–04
+      * HTML UI = 01–05
+      Поддерживаемые значения:
+      * 01 = Text
+      * 02 = Single Select
+      * 03 = Multi Select
+      * 04 = OOB
+      * 05 = HTML Other (valid only for HTML UI)
+    example: "01,02,03,04,05"
+  # DOESN'T USE IN ANDROID SDK
+  # colorDepth:
+  #   type: string
+  #   description: |
+  #     Глубина цвета в битах.
+  #     Допустимые значения:
+  #     1/4/8/15/16/24/32/48
+  #     Рекомендация по получению значения в браузере 
+  #     (из глобального объекта screen):
+  #     screen.colorDepth
+  #   default: 48
+  # javaEnabled:
+  #   type: string
+  #   description: |
+  #     Поддерживает ли браузер пользователя Java: 
+  #     * true
+  #     * false
+  #   default: false

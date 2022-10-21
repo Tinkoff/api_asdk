@@ -1,0 +1,79 @@
+paths:
+  QrMembersList:
+    post:
+      deprecated: true
+      tags:
+        - Методы оплаты по QR
+      summary: QrMembersList
+      description: |
+        Описание: Список участников куда может быть осуществлен возврат платежа, совершенного
+        по QR.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required:
+                - TerminalKey
+                - PaymentId
+                - Token
+              properties:
+                TerminalKey:
+                  type: string
+                  description: |
+                    Идентификатор терминала, выдается Продавцу
+                    Банком
+                  example: TinkoffBankTest
+                PaymentId:
+                  type: string
+                  description: |
+                    Уникальный идентификатор транзакции в системе
+                    Банка
+                  example: 10063
+                Token:
+                  type: string
+                  description: Подпись запроса
+                  example: 871199b37f207f0c4f721a37cdcc71dfcea880b4a4b85e3cf852c5dc1e99a8d6 
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                type: object
+                required:
+                  - OrderId
+                  - Success
+                  - ErrorCode
+                properties:
+                  Members:
+                    type: array
+                    description: |
+                      Массив списка участников. Возвращается
+                      только если возврат возможен
+                    items:
+                      - $ref: ../components/schemas/Member.yaml
+                  OrderId:
+                    description: |
+                      Идентификатор заказа в системе продавца
+                    type: string
+                    maxLength: 36
+                    example: 21050
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                    example: OK

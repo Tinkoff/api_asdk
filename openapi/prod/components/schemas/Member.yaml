@@ -1,0 +1,23 @@
+type: object
+required:
+  - MemberId
+  - MemberName
+  - IsPayee
+properties:
+  MemberId:
+    type: string
+    description: |
+      Идентификатор участника
+    example: 1000000
+  MemberName:
+    type: string
+    description: |
+      Наименование участника
+    example: АО "Тинькофф Банк"
+  IsPayee:
+    type: boolean
+    description: |
+      * true - если данный участник был получателем
+      указанного платежа, 
+      * false - в противном случае
+    example: true

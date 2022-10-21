@@ -1,0 +1,78 @@
+paths:
+  TinkoffPay:
+    transactions@{paymentId}@versions@{version}@link:
+      get:
+        tags:
+          - Оплата через Tinkoff Pay Web
+        summary: link
+        description: |
+           Метод получения Link для безусловного редиректа на мобильных устройствах
+        parameters:
+          - in: path
+            name: paymentId
+            schema:
+              type: number
+              maxLength: 20
+              example: 13660
+            required: true
+            description: |
+              Идентификатор платежа в системе банка
+          - in: path
+            name: version
+            schema:
+              type: string
+              example: '1.0'
+            description: |
+              Версия Tinkoff Pay, доступная на терминале:
+              * 1.0 (e-invoice)
+              * 2.0 (Tinkoff Pay)
+        responses: 
+          '200':
+            description: OK
+            content: 
+              application/json: 
+                schema:
+                  type: object
+                  required:
+                    - Params
+                    - Success
+                    - ErrorCode
+                  properties:
+                    Params:
+                      description: |
+                        Параметры ответа
+                      type: object
+                      required:
+                        - RedirectUrl
+                      properties:
+                        RedirectUrl:
+                          description: |
+                            Link для перехода в приложение MB на мобильных
+                            устройствах
+                          example: "tinkoffbank://Main/EInvoicing?billId=5000015507&providerId=e-invoicing"
+                          type: string
+                          format: uri
+                        WebQR:
+                          description: |
+                            URL для получения QR
+                          type: string
+                          format: uri
+                    Success: 
+                      description: |
+                        Успешность операции
+                      type: boolean
+                      example: true
+                    ErrorCode:
+                      description: |
+                        Код ошибки, «0» если успешно.
+                      type: string
+                      maxLength: 20
+                      example: 0
+                    Message:
+                      description: |
+                        Краткое описание ошибки
+                      type: string
+                    Details:
+                      description: |
+                        Подробное описание ошибки
+                      type: string

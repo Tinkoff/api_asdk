@@ -1,0 +1,117 @@
+paths:
+  RemoveCard:
+    post:
+      tags:
+        - Методы работы с привязанными картами и клиентами 
+      summary: RemoveCard
+      description: Удаляет привязанную карту покупателя
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required: 
+                - TerminalKey
+                - CustomerKey
+                - CardId
+                - Token
+              properties: 
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  maxLength: 20
+                  example: testRegressBank
+                CustomerKey:
+                  description: |
+                    Идентификатор покупателя в системе Продавца
+                  type: string
+                  maxLength: 36
+                  example: testCustomer1234
+                CardId:
+                  description: |
+                    Идентификатор карты в системе Банка
+                  type: string
+                  maxLength: 40
+                  example: 156516516
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+                IP:
+                  description: |
+                    IP-адрес запроса
+                  type: string
+                  maxLength: 40
+                  example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: object
+                required: 
+                  - TerminalKey
+                  - CardId
+                  - CustomerKey
+                  - Status
+                  - Success
+                  - CardType
+                  - ErrorCode
+                properties: 
+                  TerminalKey:
+                    description: |
+                      Идентификатор терминала. Выдается продавцу банком 
+                      при заведении терминала.
+                    type: string
+                    maxLength: 20
+                    example: TinkoffBankTest
+                  Status:
+                    description: |
+                      Статус платежа
+                    type: string
+                    maxLength: 20
+                    example: NEW
+                  CustomerKey:
+                    description: |
+                      Идентификатор покупателя в системе Продавца
+                    type: string
+                    maxLength: 36
+                    example: testCustomer1234
+                  CardId:
+                    description: |
+                      Идентификатор карты в системе Банка
+                    type: string
+                    maxLength: 40
+                    example: 156516516
+                  CardType:
+                    description: |
+                      Тип карты:
+                      * карта списания;
+                      * карта пополнения;
+                      * карта пополнения и списания.
+                    type: string
+                    example: 0
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string

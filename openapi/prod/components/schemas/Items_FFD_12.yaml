@@ -1,0 +1,227 @@
+type: object
+required: 
+  - Name
+  - Price
+  - Quantity
+  - Amount
+  - Tax
+  - PaymentMethod
+  - PaymentObject
+  - MeasurementUnit
+properties: 
+  AgentData:
+    description: |
+      Данные агента.
+      Обязателен, если используется агентская схема
+    $ref: AgentData.yaml
+  SupplierInfo:
+    description: |
+      Данные поставщика платежного агента
+      Обязателен, если передается значение AgentSign в объекте AgentData
+    $ref: SupplierInfo.yaml    
+  Name:
+    description: |
+      Наименование товара.
+    type: string
+    maxLength: 128
+    example: Наименование товара 1
+  Price:
+    description: Цена в копейках
+    type: number
+    example: 10000
+  Quantity:
+    description: |
+      Количество или вес товара
+    type: number
+    maxLength: 8
+    example: 1.00
+  Amount:
+    description: |
+      Стоимость товара в копейках.
+      Произведение Quantity и Price
+    type: number
+    maxLength: 10
+    example: 10000
+  Tax:
+    description: |
+      Ставка НДС.
+      Перечисление со значениями:
+      * none - без НДС;
+      * vat0 - НДС по ставке 0%
+      * vat10 - НДС по ставке 10%
+      * vat20 - НДС по ставке 20%
+      * vat110 - НДС чека по расчетной ставке 10/110
+      * vat120 - НДС чека по расчетной ставке 20/120
+    type: string
+    enum: 
+      - none
+      - vat0
+      - vat10
+      - vat20
+      - vat110
+      - vat120
+    example: vat10
+  PaymentMethod:
+    description: |
+      Признак способа расчёта. 
+      Возможные значения:
+      * full_prepayment – предоплата 100%
+      * prepayment – предоплата
+      * advance – аванс
+      * full_payment – полный расчет
+      * partial_payment – частичный расчет и кредит
+      * credit» – передача в кредит
+      * credit_payment – оплата кредита
+      Если значение не
+      передано, по умолчанию в онлайн-кассу
+      передается признак способа расчёта
+      "full_payment".
+    type: string
+    enum:
+      - full_prepayment
+      - prepayment
+      - advance
+      - full_payment
+      - partial_payment
+      - credit
+      - credit_payment
+    example: full_prepayment
+  PaymentObject:
+    description: |
+      Значения реквизита "признак предмета расчета"
+      (тег 1212) таблица 101
+      Возможные значения:
+      * «commodity» – товар.
+      * «excise» – подакцизный товар.
+      * «job» – работа.
+      * «service» – услуга.
+      * «gambling_bet» – ставка азартной игры.
+      * «gambling_prize» – выигрыш азартной игры.
+      * «lottery» – лотерейный билет.
+      * «lottery_prize» – выигрыш лотереи.
+      * «intellectual_activity» – предоставление
+        результатов интеллектуальной деятельности.
+      * «payment» – платеж.
+      * «agent_commission» – агентское
+        вознаграждение.
+      * «contribution» - Выплата
+      * «property_rights» - Имущественное право
+      * «unrealization» - Внереализационный доход
+      * «tax_reduction» - Иные платежи и взносы
+      * «trade_fee» - Торговый сбор
+      * «resort_tax» - Курортный сбор
+      * «pledge» - Залог
+      * «income_decrease» - Расход
+      * «ie_pension_insurance_without_payments» - Взносы на ОПС ИП
+      * «ie_pension_insurance_with_payments» - Взносы на ОПС
+      * «ie_medical_insurance_without_payments» - Взносы на ОМС ИП
+      * «ie_medical_insurance_with_payments» - Взносы на ОМС
+      * «social_insurance» - Взносы на ОСС
+      * «casino_chips» - Платеж казино
+      * «agent_payment» - Выдача ДС
+      * «excisable_goods_without_marking_code» - АТНМ
+      * «excisable_goods_with_marking_code» - АТМ
+      * «goods_without_marking_code» - ТНМ
+      * «goods_with_marking_code» - ТМ
+      * «another» – иной предмет расчета.      
+    type: string
+    enum:
+      - commodity
+      - excise
+      - job
+      - service
+      - gambling_bet
+      - gambling_prize
+      - lottery
+      - lottery_prize
+      - intellectual_activity
+      - payment
+      - agent_commission
+      - contribution
+      - property_rights
+      - unrealization
+      - tax_reduction
+      - trade_fee
+      - resort_tax
+      - pledge
+      - income_decrease
+      - ie_pension_insurance_without_payments
+      - ie_pension_insurance_with_payments
+      - ie_medical_insurance_without_payments
+      - ie_medical_insurance_with_payments
+      - social_insurance
+      - casino_chips
+      - agent_payment
+      - excisable_goods_without_marking_code
+      - excisable_goods_with_marking_code
+      - goods_without_marking_code
+      - goods_with_marking_code
+      - another
+    example: goods_with_marking_code
+  UserData:
+    description: |
+      Дополнительный реквизит предмета расчета.
+    type: string
+    example: Данные пользователя ext.test.qa@tinkoff.ru
+  Excise:
+    description: |
+      Сумма акциза в рублях с учетом копеек,
+      включенная в стоимость предмета расчета.
+      * Целая часть не более 8 знаков;
+      * дробная часть не более 2 знаков;
+      * значение не может быть отрицательным.
+    type: string
+    example: 12.2
+  CountryCode:
+    description: |
+      Цифровой код страны происхождения товара в
+      соответствии с Общероссийским
+      классификатором стран мира (3 цифры)
+    type: string
+    maxLength: 3
+    example: 056
+  DeclarationNumber:
+    description: |
+      Номер таможенной декларации
+    type: string
+    maxLength: 32
+    example: 12345678901
+  MeasurementUnit:
+    description: |    
+      Единицы измерения.
+      Передовать в соответствии с ОК 015-94 (МК
+      002-97))
+    type: string
+    example: шт
+  MarkProcessingMode:
+    description: |
+      Режим обработки кода маркировки.
+      Должен принимать значение равное «0».
+      Включается в чек в случае, если предметом расчета 
+      является товар, подлежащий обязательной
+      маркировке средством идентификации 
+      (соответствующий код в поле paymentObject).
+    type: string
+  MarkCode:
+    description: |
+      Код маркировки в машиночитаемой форме,
+      представленный в виде одного из видов кодов,
+      формируемых в соответствии с требованиями,
+      предусмотренными правилами, для нанесения
+      на потребительскую упаковку, или на товары,
+      или на товарный ярлык
+    $ref: MarkCode.yaml
+  MarkQuantity:
+    description: |
+      Реквизит «дробное количество маркированного товара».
+      Передается только в случае, если расчет осуществляется 
+      за маркированный товар (соответствующий код в поле 
+      paymentObject) и значение в поле measurementUnit 
+      равно «0»
+    $ref: MarkQuantity.yaml
+  SectoralItemProps:
+    description: |
+      Отраслевой реквизит предмета расчета
+    type: array
+    items: 
+      $ref: SectoralItemProps.yaml

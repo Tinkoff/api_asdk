@@ -1,0 +1,88 @@
+type: object
+properties: 
+  AgentSign:
+    description: |
+      Признак агента. Возможные значения:
+      * bank_paying_agent – банковский платежный агент
+      * bank_paying_subagent – банковский платежный субагент
+      * paying_agent – платежный агент
+      * paying_subagent – платежный субагент
+      * attorney – поверенный
+      * commission_agent – комиссионер
+      * another – другой тип агента
+    type: string
+    example: paying_agent
+  OperationName:
+    description: |
+      Наименование операции.
+      Атрибут обязателен, если AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+    type: string
+    maxLength: 64
+    example: Позиция чека
+  Phones:
+    description: |
+      Телефоны платежного агента, в формате +{Ц}.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+      * paying_agent
+      * paying_subagent
+    type: array
+    items: 
+      type: string
+      minLength: 1
+      maxLength: 19
+    example: ["+790912312398"]
+  ReceiverPhones:
+    description: |
+      Телефоны оператора по приему платежей, в формате +{Ц}.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * paying_agent
+      * paying_subagent
+    items: 
+      type: string
+      minLength: 1
+      maxLength: 19
+    example: ["+79221210697", "+79098561231"]
+  TransferPhones:
+    description: |
+      Телефоны оператора перевода, в формате +{Ц}.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+    items: 
+      type: string
+      minLength: 1
+      maxLength: 19
+    example: ["+79221210697"]
+  OperatorName:
+    description: |
+      Наименование оператора перевода.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+    type: string
+    maxLength: 64
+    example: Tinkoff
+  OperatorAddress:
+    description: |
+      Адрес оператора перевода.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+    type: string
+    maxLength: 243
+    example: г. Тольятти
+  OperatorInn:
+    description: |
+      ИНН оператора перевода.
+      Атрибут обязателен, если в AgentSign передан в значениях:
+      * bank_paying_agent
+      * bank_paying_subagent
+    type: string
+    maxLength: 12
+    example: 7710140679
+
+    

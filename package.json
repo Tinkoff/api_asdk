@@ -1,0 +1,24 @@
+{
+    "name": "asdk_docs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "bundle": "redoc-cli bundle ./dist/openapi.yaml -o ./dist/index.html",
+      "build:prod": "openapi bundle -o ./dist/ && npm run bundle",
+      "lint": "openapi lint",
+      "start": "openapi preview-docs"
+    },
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@redocly/openapi-cli": "^1.0.0-beta.62",
+      "react-is": "^17.0.2",
+      "redoc-cli": "^0.12.3"
+    }
+  }
+  

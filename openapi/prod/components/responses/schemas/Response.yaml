@@ -1,0 +1,67 @@
+type: object
+required: 
+  - TerminalKey
+  - Amount
+  - OrderId
+  - Success
+  - PaymentId
+  - ErrorCode
+properties: 
+  TerminalKey:
+    description: |
+      Идентификатор терминала. Выдается продавцу банком 
+      при заведении терминала.
+    type: string
+    maxLength: 20
+    example: TinkoffBankTest
+  Amount:
+    description: |
+      Сумма в копейках
+    type: number
+    maxLength: 20
+    example: 100000
+  OrderId:
+    description: |
+      Идентификатор заказа в системе продавца
+    type: string
+    maxLength: 36
+    example: 21050
+  Success:
+    description: |
+      Выполнение платежа
+    type: boolean
+    example: true
+  Status:
+    description: |
+      Статус платежа
+    type: string
+    maxLength: 20
+    example: NEW
+  PaymentId:
+    description: |
+      Идентификатор платежа в системе банка
+    type: number
+    maxLength: 20
+    example: 13660
+  ErrorCode:
+    description: |
+      Код ошибки.
+      Если ошибки не произошло, передайте значение «0»
+    type: string
+    maxLength: 20
+    example: 0
+  PaymentURL:
+    description: |
+      Ссылка на платежную форму
+    type: string
+    format: uri
+    maxLength: 100
+    example: https://securepay.tinkoff.ru/rest/Authorize/1B63Y1
+  Message:
+    description: |
+      Краткое описание ошибки
+    type: string
+  Details:
+    description: |
+      Подробное описание ошибки
+    type: string

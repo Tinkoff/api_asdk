@@ -1,0 +1,25 @@
+paths:
+  Init:
+    post:
+      tags:
+        - Методы приема платежей
+      summary: Init
+      description: |
+        Метод инициирует платежную сессию 
+        
+        Получает в ответе 1 из 2 статусов:
+        * NEW - в случае успешного сценария
+        * REJECTED - в случае неуспешного сценария
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: ../components/schemas/PaymentSession.yaml
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                $ref: ../components/responses/schemas/Response.yaml

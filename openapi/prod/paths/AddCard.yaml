@@ -1,0 +1,84 @@
+paths:
+  AddCard:
+    post:
+      tags:
+        - Методы работы с привязанными картами и клиентами
+      summary: AddCard
+      description: |
+        Метод инициирует привязку карты к покупателю. 
+        В случае успешной привязки переадресует клиента на Success Add Card URL, 
+        в противном случае на Fail Add Card URL. 
+        Можно использовать форму банка, возможно заменить на кастомную форму.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: ../components/schemas/Card.yaml
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                required: 
+                  - PaymentId
+                  - TerminalKey
+                  - CustomerKey
+                  - RequestKey
+                  - Success
+                  - ErrorCode
+                properties: 
+                  PaymentId:
+                    description: |
+                      Идентификатор платежа в системе банка
+                    type: number
+                    maxLength: 20
+                    example: 13660
+                  TerminalKey:
+                    description: |
+                      Идентификатор терминала. Выдается продавцу банком 
+                      при заведении терминала.
+                    type: string
+                    maxLength: 20
+                    example: TinkoffBankTest
+                  CustomerKey:
+                    description: |
+                      Идентификатор покупателя в системе Продавца
+                    type: string
+                    example: 906540
+                    maxLength: 36
+                  RequestKey:
+                    description: |
+                      Идентификатор запроса на привязку карты
+                    type: string
+                    example: ed989549-d3be-4758-95c7-22647e03f9ec
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string
+                  # DO IS NOT USE IN ANDROID SDK
+                  # PaymentURL:
+                  #   description: |
+                  #     Ссылка на платежную форму
+                  #   type: string
+                  #   format: uri
+                  #   maxLength: 100
+                  #   example: https://securepay.tinkoff.ru/rest/Authorize/1B63Y1

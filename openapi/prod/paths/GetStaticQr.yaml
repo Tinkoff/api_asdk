@@ -1,0 +1,53 @@
+paths:
+  GetStaticQr:
+    post:
+      tags:
+        - Методы оплаты по QR
+      summary: GetStaticQr
+      description: |
+        При первом вызове регистрирует QR и возвращает информацию о нем при
+        последующих вызовах вовзращает информацию о ранее сгенерированном QR.
+        Перерегистрация статического QR происходит только при смене расчетного счета. Не
+        привязан к конкретному платежу, может быть вызван в любое время без
+        предварительного вызова `Init`.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required:
+                - TerminalKey
+              properties:
+                TerminalKey:
+                  type: string
+                  description: |
+                    Идентификатор терминала, выдается Продавцу
+                    Банком
+                  example: TinkoffBankTest
+                DataType:
+                  description: |
+                    Тип возвращаемых данных:
+                    * PAYLOAD – В ответе возвращается только Payload
+                    (по-умолчанию)
+                    * IMAGE – В ответе возвращается SVG изображение
+                    * QR
+                  default: PAYLOAD
+                  example: PAYLOAD
+                # DOESN'T USE IN ANDROID SDK
+                # Data:
+                #   description: |
+                #     Тип возвращаемых данных:
+                #     * PAYLOAD – В ответе возвращается только Payload
+                #     (по-умолчанию)
+                #     * IMAGE – В ответе возвращается SVG изображение
+                #     * QR
+                #   default: PAYLOAD
+                #   example: PAYLOAD
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: ../components/responses/schemas/QrResponse.yaml

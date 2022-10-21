@@ -1,0 +1,28 @@
+allOf:
+  - $ref: ../Response.yaml
+  - type: object
+    properties:
+      MD:
+        type: string
+        description: |
+          Уникальный идентификатор транзакции в системе Банка
+        example: ACQT-563587431
+      PaReq:
+        type: string
+        description: |
+          Шифрованная строка, содержащая результаты 3-D
+          Secure аутентификации (возвращается в ответе от
+          ACS)
+        example: | 
+          eJxVUl1TwjAQ/CtM30s+KLTDHGHQwsiogFh09C2kp1RpC2nLh7/eBAtqnnYvN3ubvUD/kK4bO9RFkmc9hzWp08BM5XGSvfecRTRyA6cvIFppxP
+          ARVaVRwD0WhXzHRhL3HMUU73itwKVtyl1Pcs8Nli3pymUQK+z2Sww6joDZYI5bAfUgYeY0OZAzNYparWRWCpBqezWeiDZnLe3BqSmkqMeh4PRy2p
+          02BfJThkymKCIsSiAnCCqvslIfhXEG5Eyg0muxKstN0SVkv983yyT7zN/emroiQOwlkF8js8qiwogdklg8rEfT5WK0jj6G7D4cepNo8TWNBmwSDXtAbAfEskTjkPk0
+          oF6DeV3a6jLj8VQHmVoXglFTqTFs7IjBn4u/BTBZa7OK8yPODPCwyTM0HSbACwby6/f6xsaoSpNMMN89+uHdV/iUPz2nyat/uxrPXz5nuX/c2nBPTVYxMflwzthJ0hIgVobUeyP1yg469xW+AedOuuM=
+      ACSUrl:
+        type: string
+        format: uri
+        description: |
+          Если в ответе метода FinishAuthorize возвращается статус 3DS_CHECKING, 
+          мерчанту необходимо сформировать запрос на URL ACS банка, 
+          выпустившего карту (в ответе параметр ACSUrl).
+        example: "https://secure.tcsbank.ru/acs/auth/start.do"

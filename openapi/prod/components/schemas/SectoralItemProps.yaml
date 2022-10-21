@@ -1,0 +1,30 @@
+type: object
+required: 
+  - FederalId
+  - Date
+  - Number
+  - Value
+properties: 
+  FederalId:
+    description: |
+      Идентификатор ФОИВ (федеральный орган
+      исполнительной власти).
+    type: string
+    example: 001
+  Date:
+    description: |
+      Дата нормативного акта ФОИВ
+    type: string
+    example: 21.11.2020
+  Number:
+    description: |
+      Номер нормативного акта ФОИВ
+    type: string
+    example: 123/43
+  Value:
+    description: |
+      Состав значений, определенных нормативного актом
+      ФОИВ.
+    type: string
+    example: test value SectoralItemProps
+  

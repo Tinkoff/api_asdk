@@ -1,0 +1,26 @@
+type: object
+required: 
+  - ShopCode
+  - Amount
+properties: 
+  ShopCode:
+    description: |
+      Код магазина
+    type: string
+  Amount:
+    description: |
+      Cумма в копейках, которая относится к
+      указанному ShopeCode
+    type: number
+  Name:
+    description: |
+      Наименование товара
+    type: string
+    maxLength: 128
+  Fee:
+    description: |
+      Сумма комиссии в копейках, удерживаемая из
+      возмещения Партнера в пользу Маркетплейса.
+      Если не передано, используется комиссия,
+      указанная при регистрации.
+    type: string

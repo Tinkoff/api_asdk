@@ -1,0 +1,47 @@
+type: object
+required:
+  - TerminalKey
+  - PaymentId
+  - RebillId
+  - Token
+properties:
+  TerminalKey:
+    description: |
+      Идентификатор терминала. 
+      Выдается продавцу банком при заведении терминала
+    type: string
+    maxLength: 20
+    example: TinkoffBankTest
+  PaymentId:
+    type: number
+    description: |
+      Уникальный идентификатор транзакции в
+      системе Банка
+    example: 700001702044
+  RebillId:
+    description: |
+      Идентификатор рекуррентного платежа
+    type: string
+    example: 145919
+  Token:
+    type: string
+    description: |
+      Подпись запроса
+    example: f5a3be479324a6d3a4d9efa0d02880b77d04a91758deddcbd9e752a6df97cab5"
+  # DOESN'T USE IN ANDROID SDK
+  # IP:
+  #   type: string
+  #   description: |
+  #     IP-адрес клиента
+  #   example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
+  # SendEmail:
+  #   type: boolean
+  #   description: |
+  #     * true – если покупатель хочет получать
+  #     уведомления на почту
+  # InfoEmail:
+  #   type: string
+  #   format: email
+  #   description: |
+  #     Адрес почты покупателя
+  #   example: customer@test.com

@@ -1,0 +1,50 @@
+paths:
+  GetQr:
+    post:
+      tags:
+        - Методы оплаты по QR
+      summary: GetQr
+      description: |
+        Метод регистрирует QR и возвращает информацию о нем. 
+        Должен быть вызван после вызова метода Init.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: ../components/schemas/GetQr.yaml
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      Data:
+                        type: string
+                        description: |
+                          В зависимости от параметра DataType в запросе это:
+                            * Payload - информация, которая должна быть закодирована в QR
+                            * SVG изображение QR в котором уже закодирован Payload
+                        example: https://qr.nspk.ru/AS1000670LSS7DN18SJQDNP4B05KLJL2?type=01&bank=100000000001&sum=10000&cur=RUB&crc=C08B
+                  # DOESN'T USE IN ANDROID SDK
+                  # - $ref: ../components/responses/schemas/QrResponse.yaml
+                  # - type: object
+                  #   required:
+                  #     - OrderId
+                  #     - PaymentId
+                  #   properties:
+                  #     OrderId:
+                  #       description: |
+                  #         Идентификатор заказа в системе продавца
+                  #       type: string
+                  #       maxLength: 36
+                  #       example: 21050
+                  #     PaymentId:
+                  #       description: |
+                  #         Идентификатор платежа в системе банка
+                  #       type: number
+                  #       maxLength: 20
+                  #       example: 13660

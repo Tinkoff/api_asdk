@@ -1,0 +1,9 @@
+allOf:
+  - $ref: ../Response.yaml
+  - type: object
+    properties:
+      CardId:
+        type: string
+        description: |
+          Идентификатор карты в системе банка. 
+          Передается только для сохраненной карты.

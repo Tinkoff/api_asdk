@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  version: 1.42
+  title: API Методы для работы с сервером по протоколу EACQ C PCI DSS
+  termsOfService: 'https://example.com/terms/'
+  contact:
+    email: contact@example.com
+    url: 'http://example.com/contact'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  x-logo:
+    url: 'https://acdn.tinkoff.ru/static/pages/files/b6a31afc-66b4-4f07-9043-753c7747d09f.webp'
+  description: 
+    $ref: ./description/main.md
+externalDocs:
+  description: Подробная документация по SDK для iOS и Android
+  url: 'https://github.com/Rebilly/generator-openapi-repo'
+  tags:
+    - name: Оплата
+    - name: Оплата по 
+    - name: Трёхстадийный 3DS
+    - name: "Расчёт комиссии"
+  servers:
+  - url: https://securepay.tinkoff.ru/v2
+    description: prod
+  - url: 'https://rest-api-test.tinkoff.ru/v2'
+    description: test
+paths:
+  /Init:
+    $ref: ./paths/Init.yaml#/paths/Init
+  /FinishAuthorize:
+    $ref: ./paths/FinishAuthorize.yaml#/paths/FinishAuthorize
+  /Charge:
+    $ref: ./paths/Charge.yaml#/paths/Charge
+  /GetState:
+    $ref: ./paths/GetState.yaml#/paths/GetState
+  /AddCard:
+    $ref: ./paths/AddCard.yaml#/paths/AddCard
+  /AttachCard:
+    $ref: ./paths/AttachCard.yaml#/paths/AttachCard
+  /GetCardList:
+    $ref: ./paths/GetCardList.yaml#/paths/GetCardList
+  /RemoveCard:
+    $ref: ./paths/RemoveCard.yaml#/paths/RemoveCard
+  /GetQr:
+    $ref: ./paths/GetQr.yaml#/paths/GetQr 
+  /GetStaticQr:
+    $ref: ./paths/GetStaticQr.yaml#/paths/GetStaticQr
+  /GetAddCardState:
+    $ref: ./paths/GetAddCardState.yaml#/paths/GetAddCardState
+  /SubmitRandomAmount:
+    $ref: ./paths/SubmitRandomAmount.yaml#/paths/SubmitRandomAmount
+  /Submit3DSAuthorizationV2:
+    $ref: ./paths/Submit3DSAuthorizationV2.yaml#/paths/Submit3DSAuthorizationV2
+  '/TinkoffPay/terminals/{TerminalKey}/status':
+    $ref: ./paths/Status.yaml#/paths/TinkoffPay/terminals@{TerminalKey}@status
+  '/TinkoffPay/transactions/{paymentId}/versions/{version}/link':
+    $ref: ./paths/Link.yaml#/paths/TinkoffPay/transactions@{paymentId}@versions@{version}@link
+  /Check3dsVersion:
+    $ref: ./paths/Check3dsVersion.yaml#/paths/Check3dsVersion
+  '/TinkoffPay/{paymentId}/QR':
+    $ref: ./paths/QR.yaml#/paths/TinkoffPay@{paymentId}@QR
+  /QrMembersList:
+    $ref: ./paths/QrMembersList.yaml#/paths/QrMembersList 

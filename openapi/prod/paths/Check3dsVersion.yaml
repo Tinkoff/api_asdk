@@ -1,0 +1,113 @@
+paths:
+  Check3dsVersion:
+    post:
+      tags:
+        - Методы приема платежей
+      summary: Check3dsVersion
+      description: |
+        Проверяет поддерживаемую версию 3DS протокола по карточным данным из входящих
+        параметров. 
+
+        При определении второй версии, возможно в ответе получение данных для прохождения
+        дополнительного метода “3DS Method”, который позволяет эмитенту собрать данные браузера
+        пользователя – это может быть полезно при принятии решения в пользу Frictionless Flow
+        (аутентификация клиента без редиректа на страницу ACS). 
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required:
+                - PaymentId 
+                - TerminalKey
+                - CardData
+                - Token
+              properties:
+                PaymentId:
+                  description: |
+                    Идентификатор платежа в системе банка
+                  type: number
+                  maxLength: 20
+                  example: 13660 
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  maxLength: 20
+                  example: testRegressBank
+                CardData:
+                  description: |
+                    Зашифрованные данные карты в формате: 
+                    "PAN=%pan%;ExpDate=%month%%year%;CVV=%secure_code%"
+                  type: string
+                  example: U5jDbwqOVx+2vDApxe/rfACMt+rfWXzPdJ8ZXxNFVIiZaLZrOW72bGe9cKZdIDnekW0nqm88YxRD↵jyfa5Ru0kY5cQV
+                    alU+juS1u1zpamSDtaGFeb8sRZfhj72yGw+io+qHGSBeorcfgoKStyKGuBPWfG↵d0PLHuyBE6QgZyIAM1XfdmNlV0UAxOnkTGDsskL
+                    pIt3AWhw2e8KOar0vwbgCTDjznDB1/DLgOW01↵Aj/bXyLJoG1BkOrPBm9JURs+f+uyFae0hkRicNKNgXoN5pJTSQxOEauOi6ylsVJ
+                    B3WK5MNYXtj6x↵GlxcmTk/LD9kvHcjTeojcAlDzRZ87GdWeY8wgg==
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: object
+                required:
+                  - Version
+                  - PaymentSystem
+                  - Success
+                  - ErrorCode
+                properties:
+                  Version:
+                    description: |
+                      Версия протокола 3DS. 
+                      Пример:
+                      * "1.0.0” – первая версия
+                      * “2.1.0” – вторая версия
+                    type: string
+                    example: 2.1.0
+                  TdsServerTransID:
+                    description: |
+                      Уникальный идентификатор транзакции,
+                      генерируемый 3DS-Server, обязательный
+                      параметр для 3DS второй версии.
+                    type: string
+                    example: "17d3791b-5cfa-4318-bc23-3d949e8c4b7e"
+                  ThreeDSMethodURL:
+                    description: |
+                      Дополнительный параметр для 3DS второй
+                      версии, который позволяет пройти этап по
+                      сбору данных браузера ACS-ом
+                    type: string
+                    format: uri
+                    example: “https://acs.vendorcert.mirconnect.ru/ds/6300”
+                  PaymentSystem:
+                    description: |
+                      Платежная система карты
+                    type: string
+                    example: mir
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string

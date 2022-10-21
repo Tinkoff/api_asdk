@@ -1,0 +1,71 @@
+paths:
+  TinkoffPay:
+    terminals@{TerminalKey}@status:
+      get:
+        tags:
+          - Оплата через Tinkoff Pay Web
+        summary: status
+        description: |
+           Метод определения возможности проведения платежа Tinkoff Pay на терминале и устройстве
+        parameters:
+          - in: path
+            name: TerminalKey
+            schema:
+              type: string
+              maxLength: 20
+              example: testRegress
+            required: true
+            description: |
+              Платежный ключ, выдается Продавцу при заведении
+              терминала
+        responses: 
+          '200':
+            description: OK
+            content: 
+              application/json: 
+                schema:
+                  type: object
+                  required:
+                    - Params
+                    - Success
+                    - ErrorCode
+                  properties:
+                    Params:
+                      description: |
+                        Параметры ответа
+                      type: object
+                      required:
+                        - Allowed
+                      properties:
+                        Allowed:
+                          description: |
+                            Наличие возможности проведения оплаты
+                            Tinkoff Pay по API, SDK
+                          example: true
+                          type: boolean
+                        Version:
+                          description: |
+                            Версия Tinkoff Pay, доступная на терминале:
+                            * 1.0 (e-invoice)
+                            * 2.0 (Tinkoff Pay)
+                          type: string
+                          example: '1.0'
+                    Success: 
+                      description: |
+                        Успешность операции
+                      type: boolean
+                      example: true
+                    ErrorCode:
+                      description: |
+                        Код ошибки, «0» если успешно.
+                      type: string
+                      maxLength: 20
+                      example: 0
+                    Message:
+                      description: |
+                        Краткое описание ошибки
+                      type: string
+                    Details:
+                      description: |
+                        Подробное описание ошибки
+                      type: string

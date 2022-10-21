@@ -1,0 +1,68 @@
+type: object
+required: 
+  - Items
+  - Taxation
+properties: 
+  Items:
+    description: Массив позиций чека с информацией о товарах
+    type: array
+    items: 
+      $ref: Items_FFD_105.yaml
+  FfdVersion:
+    description: |
+      Версия ФФД.
+      Возможные значения:
+      * "FfdVersion": "1.2"
+      * "FfdVersion": "1.05"
+      По умолчанию версия ФФД - 1.05
+    type: string
+    default: 1.05
+  Email:
+    description: |
+      Электронная почта покупателя.
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Phone” 
+    type: string
+    format: email
+    maxLength: 64
+    example: a@test.ru
+  Phone:
+    description: |
+      Телефон покупателя в формате +{Ц}
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Email” 
+    type: string
+    maxLength: 64
+    example: +79031234567
+  Taxation:
+    description: |
+      Система налогообложения. Перечисление с
+      возможными значениями:
+      * "osn" - общая СН;
+      * "usn_income" - упрощенная СН (доходы);
+      * "usn_income_outcome" - упрощенная СН (доходы минус расходы);
+      * "envd" - единый налог на вмененный доход;
+      * "esn" - единый сельскохозяйственный налог;
+      * "patent" - патентная СН.
+    type: string
+    enum: 
+      - osn
+      - usn_income
+      - usn_income_outcome
+      - envd
+      - esn
+      - patent
+    example: osn
+  Payments:
+    description: |
+      Объект c информацией о видах суммы платежа.
+      см. структура объекта Payments
+      1. Если объект не передан, будет автоматически указана итоговая 
+      сумма чека с видом оплаты "Безналичный".
+      2. Если передан объект receipt.Payments, то значение в Electronic 
+      должно быть равно итоговому значению Amount в методе Init. 
+      При этом сумма введенных значений по всем видам оплат, 
+      включая Electronic, должна быть равна сумме (Amount) всех товаров, 
+      переданных в объекте receipt.Items.
+    $ref: Payments.yaml
+  

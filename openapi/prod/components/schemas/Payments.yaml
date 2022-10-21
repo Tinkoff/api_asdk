@@ -1,0 +1,35 @@
+type: object
+required: 
+  - Electronic
+properties: 
+  Cash:
+    description: | 
+      Вид оплаты "Наличные". 
+      Сумма к оплате в копейках
+    type: number
+    maxLength: 14
+    example: 90000
+  Electronic:
+    description: |
+      Вид оплаты "Безналичный".
+    type: number
+    maxLength: 14
+    example: 50000
+  AdvancePayment:
+    description: |
+      Вид оплаты "Предварительная оплата (Аванс)".
+    type: number
+    maxLength: 14
+    example: 0
+  Credit:
+    description: |
+      Вид оплаты "Постоплата (Кредит)".
+    type: number
+    maxLength: 14
+    example: 0
+  Provision:
+    description: |
+      Вид оплаты "Иная форма оплаты".
+    type: number
+    maxLength: 14
+    example: 0

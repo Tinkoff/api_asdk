@@ -1,0 +1,93 @@
+paths:
+  GetCardList:
+    post:
+      tags:
+        - Методы работы с привязанными картами и клиентами
+      summary: GetCardList
+      description: |
+        Возвращает список привязанных карт покупателя. 
+        В том числе показывает удаленные карты.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required: 
+                - TerminalKey
+                - CustomerKey
+                - Token
+              properties: 
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  example: testRegressBank
+                CustomerKey:
+                  description: |
+                    Идентификатор покупателя в системе Продавца
+                  type: string
+                  example: testCustomer1234
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+                # DOESN'T USE IN ANDROID SDK
+                # IP:
+                #   description: |
+                #     IP-адрес запроса
+                #   type: string
+                #   example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: array
+                items :
+                  type: object
+                  required:
+                    - CardId
+                    - Pan
+                    - Status 
+                    - CardType
+                  properties:
+                    CardId:
+                      description: |
+                        Идентификатор карты в системе Банка
+                      type: string
+                      example: 881900
+                    Pan:
+                      description: |
+                        Номер карты
+                      type: string
+                      example: 518223******0036
+                    Status:
+                      description: |
+                        Статус карты:
+                        * A – активная, 
+                        * I – не активная, 
+                        * D - удаленная
+                      type: string
+                      example: D
+                    RebillId:
+                      description: |
+                        Идентификатор рекуррентного платежа
+                      type: string
+                    CardType:
+                      description: |
+                        Тип карты:
+                        * карта списания;
+                        * карта пополнения;
+                        * карта пополнения и списания.
+                      type: string
+                      example: 0
+                    ExpDate:
+                      description: |
+                        Срок действия карты
+                      type: string
+                      example: 1122
+                    
+                      

@@ -1,0 +1,41 @@
+type: object
+required: 
+  - TerminalKey
+  - Success
+  - Data
+  - ErrorCode
+properties: 
+  TerminalKey:
+    description: |
+      Идентификатор терминала. Выдается продавцу банком 
+      при заведении терминала.
+    type: string
+    maxLength: 20
+    example: TinkoffBankTest
+  Success:
+    description: |
+      Успешность операции
+    type: boolean
+    example: true
+  Data:
+    type: string
+    description: |
+      В зависимости от параметра DataType в запросе это:
+        * Payload - информация, которая должна быть закодирована в QR
+        * SVG изображение QR в котором уже закодирован Payload
+    example: https://qr.nspk.ru/AS1000670LSS7DN18SJQDNP4B05KLJL2?type=01&bank=100000000001&sum=10000&cur=RUB&crc=C08B
+  ErrorCode:
+    description: |
+      Код ошибки.
+      Если ошибки не произошло, передайте значение «0»
+    type: string
+    maxLength: 20
+    example: 0
+  Message:
+    description: |
+      Краткое описание ошибки
+    type: string
+  Details:
+    description: |
+      Подробное описание ошибки
+    type: string

@@ -1,0 +1,102 @@
+paths:
+  GetAddCardState:
+    post:
+      tags:
+        - Методы работы с привязанными картами и клиентами 
+      summary: GetAddCardState
+      description: Возвращает статус привязки карты.
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required: 
+                - TerminalKey
+                - RequestKey
+                - Token
+              properties: 
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  maxLength: 20
+                  example: testRegressBank
+                RequestKey:
+                  description: |
+                    Идентификатор запроса на привязку карты
+                  type: string
+                  example: 13021e10-a3ed-4f14-bcd1-823b5ac37390
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: object
+                required: 
+                  - TerminalKey
+                  - RequestKey
+                  - Status
+                  - Success
+                properties: 
+                  TerminalKey:
+                    description: |
+                      Идентификатор терминала. Выдается продавцу банком 
+                      при заведении терминала.
+                    type: string
+                    maxLength: 20
+                    example: TinkoffBankTest
+                  RequestKey:
+                    description: |
+                      Идентификатор запроса на привязку карты
+                    type: string
+                    example: 13021e10-a3ed-4f14-bcd1-823b5ac37390
+                  Status:
+                    description: |
+                      Статус платежа
+                    type: string
+                    maxLength: 20
+                    example: NEW
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  CardId:
+                    description: |
+                      Идентификатор карты в системе Банка
+                    type: string
+                    maxLength: 40
+                    example: 156516516
+                  RebillId:
+                    description: |
+                      Идентификатор рекуррентного платежа
+                    type: string
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string
+                  # DOESN'T USE IN ANDROID SDK  
+                  # CustomerKey:
+                  #   description: |
+                  #     Идентификатор покупателя в системе Продавца
+                  #   type: string
+                  #   maxLength: 36
+                  #   example: testCustomer1234

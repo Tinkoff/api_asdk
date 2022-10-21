@@ -1,0 +1,78 @@
+type: object
+required: 
+  - FfdVersion
+  - Taxation
+  - Items
+properties: 
+  FfdVersion:
+    description: |
+      Версия ФФД.
+      Возможные значения:
+      * "FfdVersion": "1.2"
+      * "FfdVersion": "1.05"
+    type: string
+  ClientInfo:
+    description: | 
+      Информация по покупателю.
+      Обязателен для товаров с маркировкой
+    $ref: ClientInfo.yaml
+  Taxation:
+    description: |
+      Система налогообложения. Перечисление с
+      возможными значениями:
+      * "osn" - общая СН;
+      * "usn_income" - упрощенная СН (доходы);
+      * "usn_income_outcome" - упрощенная СН (доходы минус расходы);
+      * "envd" - единый налог на вмененный доход;
+      * "esn" - единый сельскохозяйственный налог;
+      * "patent" - патентная СН.
+    type: string
+    enum: 
+      - osn
+      - usn_income
+      - usn_income_outcome
+      - envd
+      - esn
+      - patent
+    example: osn
+  Email:
+    description: |
+      Электронная почта покупателя.
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Phone” 
+    type: string
+    format: email
+    maxLength: 64
+    example: a@test.ru
+  Phone:
+    description: |
+      Телефон покупателя в формате +{Ц}
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Email” 
+    type: string
+    maxLength: 64
+    example: +79031234567
+  Customer:
+    description: Идентификатор/Имя покупателя
+    type: string
+  CustomerInn:
+    description: ИНН покупателя
+    type: string
+  Items:
+    description: Массив, содержащий в себе информацию о товарах
+    type: array
+    items: 
+      $ref: Items_FFD_12.yaml
+  Payments:
+    description: |
+      Объект c информацией о видах суммы платежа.
+      см. структура объекта Payments
+      1. Если объект не передан, будет автоматически указана итоговая 
+      сумма чека с видом оплаты "Безналичный".
+      2. Если передан объект receipt.Payments, то значение в Electronic 
+      должно быть равно итоговому значению Amount в методе Init. 
+      При этом сумма введенных значений по всем видам оплат, 
+      включая Electronic, должна быть равна сумме (Amount) всех товаров, 
+      переданных в объекте receipt.Items.
+    $ref: Payments.yaml
+  

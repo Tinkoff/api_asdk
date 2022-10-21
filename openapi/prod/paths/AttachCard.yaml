@@ -1,0 +1,155 @@
+paths:
+  AttachCard:
+    post:
+      tags:
+        - Методы работы с привязанными картами и клиентами
+      summary: AttachCard
+      description: |
+        Завершает привязку карты к покупателю.  
+        В случае успешной привязки переадресует клиента на **Success Add Card URL**
+        в противном случае на **Fail Add Card URL**.  
+        Для прохождения 3DS второй версии перед вызовом метода должен быть вызван **/v2/check3dsVersion**
+        и выполнен **3DS Method**, который является обязательным при прохождении **3DS** по протоколу версии
+        2.0.
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required:
+                - TerminalKey
+                - RequestKey
+                - CardData
+                - Token
+              properties:
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала. Выдается продавцу банком 
+                    при заведении терминала.
+                  type: string
+                  maxLength: 20
+                  example: TinkoffBankTest
+                RequestKey:
+                  description: |
+                    Идентификатор запроса на привязку карты
+                  type: string
+                  example: 13021e10-a3ed-4f14-bcd1-823b5ac37390
+                CardData:
+                  description: |
+                    Зашифрованные данные карты в формате: 
+                    "PAN=%pan%;ExpDate=%month%%year%;CVV=%secure_code%"
+                  type: string
+                  example: U5jDbwqOVx+2vDApxe/rfACMt+rfWXzPdJ8ZXxNFVIiZaLZrOW72bGe9cKZdIDnekW0nqm88YxRD↵jyfa5Ru0kY5cQV
+                    alU+juS1u1zpamSDtaGFeb8sRZfhj72yGw+io+qHGSBeorcfgoKStyKGuBPWfG↵d0PLHuyBE6QgZyIAM1XfdmNlV0UAxOnkTGDsskL
+                    pIt3AWhw2e8KOar0vwbgCTDjznDB1/DLgOW01↵Aj/bXyLJoG1BkOrPBm9JURs+f+uyFae0hkRicNKNgXoN5pJTSQxOEauOi6ylsVJ
+                    B3WK5MNYXtj6x↵GlxcmTk/LD9kvHcjTeojcAlDzRZ87GdWeY8wgg==
+                DATA:
+                  description: |
+                    Ключ = значение дополнительных параметров через “|”,
+                    например, Email = a@test.ru|Phone = +71234567890. Если
+                    ключи или значения содержат в себе спец символы, то
+                    получившееся значение должно быть закодировано
+                    функцией urlencode. Максимальная длина для каждого
+                    передаваемого параметра:
+                    * Ключ – 20 знаков,
+                    * Значение – 100 знаков. 
+                    
+                    Максимальное количество пар «ключ-значение» не может
+                    превышать 20
+                  type: object
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 7241ac8307f349afb7bb9dda760717721bbb45950b97c67289f23d8c69cc7b96
+
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                required:
+                  - TerminalKey
+                  - CustomerKey
+                  - RequestKey
+                  - CardId
+                  - Success
+                  - ErrorCode
+                properties:
+                  TerminalKey:
+                    description: |
+                      Платежный ключ, выдается Продавцу при заведении
+                      терминала
+                    type: string
+                    maxLength: 20
+                    example: testRegress
+                  CustomerKey:
+                    description: |
+                      Идентификатор покупателя в системе Продавца
+                    type: string
+                    example: testRegress5
+                  RequestKey:
+                    description: |
+                      Идентификатор запроса на привязку карты
+                    type: string
+                    example: 8de92934-26c9-474c-a4ce-424f2021d24d
+                  CardId:
+                    description: |
+                      Идентификатор карты в системе Банка
+                    type: string
+                    example: 5555
+                  Success: 
+                    description: |
+                      Успешность операции
+                    type: boolean
+                    example: true
+                  ErrorCode:
+                    description: |
+                      Код ошибки, «0» если успешно.
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Status:
+                    description: |
+                      Статус привязки карты
+                    type: string
+                    maxLength: 20
+                  RebillId:
+                    description: |
+                      Идентификатор рекуррентного платежа
+                    type: string
+                    example: 130799909
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string
+                  ACSUrl:
+                    description: |
+                      Адрес сервера управления доступом, для проверки 3DS
+                      (возвращается в ответе на статус 3DS_CHECKING)
+                    type: string
+                    format: uri
+                    example: https://secure.tcsbank.ru/acs/auth/start.do
+                  MD:
+                    description: |
+                      Уникальный идентификатор транзакции в системе
+                      Банка (возвращается в ответе на статус 3DS_CHECKING)
+                    type: string
+                    example: ACQT-563587431
+                  PaReq:
+                    description: |
+                      Результат аутентификации 3-D Secure (возвращается
+                      в ответе на статус 3DS_CHECKING)
+                    type: string
+                    example: eJxVUl1TwjAQ/CtM30s+KLTDHGHQwsiogFh09C2kp1RpC2nLh7/eBAtqnnYvN3ubvUD/kK4bO9RFkmc9hzWp08BM5XGSvfecRT
+                      RyA6cvIFppxPARVaVRwD0WhXzHRhL3HMUU73itwKVtyl1Pcs8Nli3pymUQK+z2Sww6joDZYI5bAfUgYeY0OZAzNYparWRWCpBqe
+                      zWeiDZnLe3BqSmkqMeh4PRy2p02BfJThkymKCIsSiAnCCqvslIfhXEG5Eyg0muxKstN0SVkv983yyT7zN/emroiQOwlkF8js8qiwogdk
+                      lg8rEfT5WK0jj6G7D4cepNo8TWNBmwSDXtAbAfEskTjkPk0oF6DeV3a6jLj8VQHmVoXglFTqTFs7IjBn4u/BTBZa7OK8yPODPCwyT
+                      M0HSbACwby6/f6xsaoSpNMMN89+uHdV/iUPz2nyat/uxrPXz5nuX/c2nBPTVYxMflwzthJ0hIgVobUeyP1yg469xW+AedOuuM=

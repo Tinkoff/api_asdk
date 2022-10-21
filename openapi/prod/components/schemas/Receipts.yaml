@@ -1,0 +1,55 @@
+type: object
+required: 
+  - ShopCode
+  - Items
+properties: 
+  ShopCode:
+    description: |
+      Код магазина.
+      Для параметра ShopСode необходимо использовать
+      значение параметра Submerchant_ID, полученного
+      при регистрации партнеров через xml или API
+    type: string
+    example: 12345
+  Items:
+    description: |
+      Массив, содержащий в себе информацию о товарах
+    type: array
+    items: 
+      $ref: Items_FFD_105.yaml
+  Email:
+    description: |
+      Электронная почта покупателя.
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Phone” 
+    type: string
+    format: email
+    maxLength: 64
+    example: a@test.ru
+  Phone:
+    description: |
+      Телефон покупателя в формате +{Ц}
+      Атрибут должен быть заполнен, если не передано значение 
+      в атрибуте “Email” 
+    type: string
+    maxLength: 64
+    example: +79031234567
+  Taxation:
+    description: |
+      Система налогообложения. Перечисление с
+      возможными значениями:
+      * "osn" - общая СН;
+      * "usn_income" - упрощенная СН (доходы);
+      * "usn_income_outcome" - упрощенная СН (доходы минус расходы);
+      * "envd" - единый налог на вмененный доход;
+      * "esn" - единый сельскохозяйственный налог;
+      * "patent" - патентная СН.
+    type: string
+    enum: 
+      - osn
+      - usn_income
+      - usn_income_outcome
+      - envd
+      - esn
+      - patent
+    example: osn

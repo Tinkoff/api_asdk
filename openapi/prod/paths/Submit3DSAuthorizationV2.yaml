@@ -1,0 +1,72 @@
+paths:
+  Submit3DSAuthorizationV2:
+    post:
+      tags:
+        - Методы приема платежей
+      summary: Submit3DSAuthorizationV2
+      description: |
+        Осуществляет проверку результатов прохождения 3-D Secure v2 и при успешном результате
+        прохождения 3-D Secure v2 подтверждает инициированный платеж.
+        При использовании одностадийной оплаты осуществляет списание денежных средств с карты
+        покупателя.
+        При двухстадийной оплате осуществляет блокировку указанной суммы на карте покупателя. 
+
+        Получает в ответе 1 из 2 статусов:
+        * CONFIRMED - При одностадийной оплате
+        * AUTHORIZED - При двухстадийной оплате
+      requestBody: 
+        required: true
+        content: 
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - crec 
+                - TerminalKey
+                - Token
+              properties:
+                crec:
+                  description: |
+                    Закодированный в 64-разрядный код, объект с ключами:
+                    * threeDSServerTransID
+                    * transStatus
+                  type: string
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  maxLength: 20
+                  example: testRegressBank
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: object
+                properties: 
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string
