@@ -21,7 +21,7 @@ externalDocs:
     - name: Оплата по 
     - name: Трёхстадийный 3DS
     - name: "Расчёт комиссии"
-  servers:
+servers:
   - url: https://securepay.tinkoff.ru/v2
     description: prod
   - url: 'https://rest-api-test.tinkoff.ru/v2'
