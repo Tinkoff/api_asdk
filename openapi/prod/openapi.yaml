@@ -12,7 +12,12 @@ info:
   x-logo:
     url: 'https://acdn.tinkoff.ru/static/pages/files/b6a31afc-66b4-4f07-9043-753c7747d09f.webp'
   description: 
-    $ref: ./description/main.md
+      $ref: ./description/main.md
+servers:
+  - url: https://securepay.tinkoff.ru/v2
+    description: prod
+  - url: 'https://rest-api-test.tinkoff.ru/v2'
+    description: test
 externalDocs:
   description: Подробная документация по SDK для iOS и Android
   url: 'https://github.com/Rebilly/generator-openapi-repo'
@@ -21,11 +26,6 @@ externalDocs:
     - name: Оплата по 
     - name: Трёхстадийный 3DS
     - name: "Расчёт комиссии"
-  servers:
-  - url: https://securepay.tinkoff.ru/v2
-    description: prod
-  - url: 'https://rest-api-test.tinkoff.ru/v2'
-    description: test
 paths:
   /Init:
     $ref: ./paths/Init.yaml#/paths/Init
