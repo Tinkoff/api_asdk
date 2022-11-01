@@ -33,7 +33,11 @@ properties:
     example: true
   Status:
     description: |
-      Статус платежа
+      Статус платежа.
+      Получает в ответе 1 из 3 статусов платежа:
+        * CONFIRMED - при одностадийной оплате
+        * AUTHORIZED - при двухстадийной оплате
+        * 3DS_CHECKING - при необходимости прохождения проверки 3-DSecure
     type: string
     maxLength: 20
     example: NEW
