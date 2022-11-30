@@ -1,0 +1,103 @@
+paths:
+  Submit3DSAuthorization:
+    post:
+      tags:
+        - Методы приема платежей
+      summary: Submit3DSAuthorization
+      description: |
+        Осуществляет проверку результатов прохождения 3-D Secure и при успешном результате
+        прохождения 3-D Secure подтверждает инициированный платеж.
+        При использовании одностадийной оплаты осуществляет списание денежных средств с карты
+        покупателя.
+        При двухстадийной оплате осуществляет блокировку указанной суммы на карте покупателя. 
+
+        Получает в ответе 1 из 2 статусов:
+        * CONFIRMED - При одностадийной оплате
+        * AUTHORIZED - При двухстадийной оплате
+      requestBody: 
+        required: true
+        content: 
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - MD
+                - PaRes 
+                - TerminalKey
+                - Token
+              properties:
+                MD:
+                  description: |
+                    Уникальный идентификатор транзакции в системе
+                    Банка (возвращается в ответе от ACS)
+                  type: string
+                  example: 2561504
+                PaRes:
+                  description: |
+                    Шифрованная строка, содержащая результаты 3-D Secure аутентификации (возвращается в ответе от ACS)
+                  type: string
+                  example: eJxVUttygjAU/BWG1w4mXKXOMY5WOrVTrOOtl7cAqeJI1AAO+vVNFKrlaffkZM9mD9Crsq12ZCJPd7yrmy2sa4zHuyTlq66+mD8bvt4jMF8LxoYzFpeCEQhZntMV09JE3vC8Hx9j27A8LzEcN7aNCPu24VIrihKXetiPdAKT/pQdCNSDiJzTsgA1VCqKeE15QYDGh8FoTBy73fZtQDWFjInRkFi4+Uz82JbH1zJwmjEyHcwAXRDEu5IX4kQ8R/Y0BEqxJeui2HcQOlGesKolSkCqCuhmYFIqlEuVKk3IDL8uPwI3jDaBGZ4XeLxZVeFw5I7nX11AqgMSWjDpzPSxb/ma6XRct4Pl4y51oJkar5zLx1wx7NWI/t3BfQFkxkKuoHHfMGDVfseZugLoDwO6+X16UfHFhUyk/32OMH3vZ5+nYBu/2d4xcMTDsn04j19VqJcmpZjKYKT3q6QigJQMqveF6lVL9O8X+AWMIbbt
+                PaymentId:
+                  description: |
+                    Уникальный идентификатор транзакции в системе Банка
+                  type: string
+                  example: testRegressBank
+                TerminalKey:
+                  description: |
+                    Идентификатор терминала, выдается Продавцу Банком.
+                  type: string
+                  maxLength: 20
+                  example: testRegressBank
+                Token:
+                  description: |
+                    Подпись запроса
+                  type: string
+                  example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json: 
+              schema:
+                type: object
+                properties: 
+                  TerminalKey:
+                    description: |
+                      Идентификатор терминала, выдается Продавцу Банком.
+                    type: string
+                    example: TinkoffBankTest
+                  OrderId:
+                    description: |
+                      Номер заказа в системе Продавца
+                    type: string
+                    example: 21050
+                  Success:
+                    description: |
+                      Выполнение платежа
+                    type: boolean
+                    example: true
+                  Status:
+                    description: |
+                      Статус транзакции
+                    type: string
+                    example: CONFIRMED
+                  PaymentId:
+                    description: |
+                      Уникальный идентификатор транзакции в системе Банка
+                    type: string
+                    example: 10063
+                  ErrorCode:
+                    description: |
+                      Код ошибки.
+                      Если ошибки не произошло, передайте значение «0»
+                    type: string
+                    maxLength: 20
+                    example: 0
+                  Message:
+                    description: |
+                      Краткое описание ошибки
+                    type: string
+                  Details:
+                    description: |
+                      Подробное описание ошибки
+                    type: string
