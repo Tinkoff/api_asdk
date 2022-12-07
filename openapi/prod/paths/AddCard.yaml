@@ -14,7 +14,9 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: ../components/schemas/Card.yaml
+              oneOf:
+                - $ref: ../components/schemas/AddCard_FULL.yaml
+                - $ref: ../components/schemas/AddCard_SDK.yaml
       responses: 
         '200':
           description: OK

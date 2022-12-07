@@ -1,0 +1,21 @@
+type: object
+required: 
+  - TerminalKey
+  - CustomerKey
+  - Token
+properties: 
+  TerminalKey:
+    description: |
+      Идентификатор терминала, выдается Продавцу Банком.
+    type: string
+    example: testRegressBank
+  CustomerKey:
+    description: |
+      Идентификатор покупателя в системе Продавца
+    type: string
+    example: testCustomer1234
+  Token:
+    description: |
+      Подпись запроса
+    type: string
+    example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e

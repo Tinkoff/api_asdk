@@ -1,8 +1,10 @@
 type: object
 required: 
   - TerminalKey
+  - OrderId
   - Success
   - Data
+  - PaymentId
   - ErrorCode
 properties: 
   TerminalKey:
@@ -12,6 +14,12 @@ properties:
     type: string
     maxLength: 20
     example: TinkoffBankTest
+  OrderId:
+    description: |
+      Идентификатор заказа в системе продавца
+    type: string
+    maxLength: 36
+    example: 21050
   Success:
     description: |
       Успешность операции
@@ -24,6 +32,12 @@ properties:
         * Payload - информация, которая должна быть закодирована в QR
         * SVG изображение QR в котором уже закодирован Payload
     example: https://qr.nspk.ru/AS1000670LSS7DN18SJQDNP4B05KLJL2?type=01&bank=100000000001&sum=10000&cur=RUB&crc=C08B
+  PaymentId:
+    description: |
+      Идентификатор платежа в системе банка
+    type: number
+    maxLength: 20
+    example: 13660
   ErrorCode:
     description: |
       Код ошибки.

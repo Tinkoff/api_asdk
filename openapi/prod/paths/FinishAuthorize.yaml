@@ -14,7 +14,9 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: ../components/schemas/FinishAuthorize.yaml
+              oneOf:
+                - $ref: ../components/schemas/FinishAuthorize_FULL.yaml
+                - $ref: ../components/schemas/FinishAuthorize_SDK.yaml
       responses: 
         '200':
           description: OK
