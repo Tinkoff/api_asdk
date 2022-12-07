@@ -28,20 +28,19 @@ properties:
     description: |
       Подпись запроса
     example: f5a3be479324a6d3a4d9efa0d02880b77d04a91758deddcbd9e752a6df97cab5"
-  # DOESN'T USE IN ANDROID SDK
-  # IP:
-  #   type: string
-  #   description: |
-  #     IP-адрес клиента
-  #   example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
-  # SendEmail:
-  #   type: boolean
-  #   description: |
-  #     * true – если покупатель хочет получать
-  #     уведомления на почту
-  # InfoEmail:
-  #   type: string
-  #   format: email
-  #   description: |
-  #     Адрес почты покупателя
-  #   example: customer@test.com
+  IP:
+    type: string
+    description: |
+      IP-адрес клиента
+    example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
+  SendEmail:
+    type: boolean
+    description: |
+      * true – если покупатель хочет получать
+      уведомления на почту
+  InfoEmail:
+    type: string
+    format: email
+    description: |
+      Адрес почты покупателя
+    example: customer@test.com

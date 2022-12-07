@@ -107,32 +107,3 @@ properties:
       UvQ1BodW5HUk0rN25KdVhDczVtbkVvOHFma0RNVk8xWktGWDQ4TnVEL2FKcDJQdVVIY2puSnBTZ0pTSDB4U21YSnAzU1MreXFDNm54N254WUEwN2h4YjYvSnp2R2s3ZExDU2hWWGU1Z2haUjNDaFQyV
       W8rRnpXTWJRRGZtSjBLQW9kc2VlR0xaaitqMzVqOUlKMkhJRFhIUUZZMWNuTW9YVUVoTjgvdEkvRkpqRnJiYVdFRkIzRDZwOFUzT2tkUmVaNHAyYi8yYURNZXVxR1ozSUtjc3R0R2lKMFhQQVhhZXYyQU8
       o1M3RRQXVqQXRYdFlaekNTVjVBVXdXZS85T1VcXHUwMDNkXCJ9In0=
-  # DOESN'T USE IN ANDROID SDK
-  # Amount:
-  #   type: number
-  #   maxLength: 10
-  #   description: |
-  #     Сумма в копейках
-  #   example: 10000
-  # Phone: 
-  #   type: string
-  #   description: |
-  #     Телефон клиента
-  # deviceChannel:
-  #   type: string
-  #   description: |
-  #     Канал устройства.
-  #     Поддерживается следующий
-  #     канал устройства:
-  #     * 01 = Application (APP)
-  #     * 02 = Browser (BRW)
-  # Route:
-  #   type: string
-  #   description: |
-  #     Способ платежа.
-  #     Является обязательным для Apple Pay или Google Pay.
-  #   enum: 
-  #     - ACQ
-  #     - MC
-  #     - EINV
-  #     - WM

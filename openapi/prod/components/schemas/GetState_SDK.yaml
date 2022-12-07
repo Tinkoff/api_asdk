@@ -1,0 +1,24 @@
+type: object
+required:
+  - TerminalKey
+  - PaymentId
+  - Token
+properties:
+  TerminalKey:
+    description: |
+      Идентификатор терминала. 
+      Выдается продавцу банком при заведении терминала
+    type: string
+    maxLength: 20
+    example: TinkoffBankTest
+  PaymentId:
+    description: |
+      Идентификатор платежа в системе банка
+    type: number
+    maxLength: 20
+    example: 13660
+  Token:
+    description: |
+      Подпись запроса
+    type: string
+    example: 7241ac8307f349afb7bb9dda760717721bbb45950b97c67289f23d8c69cc7b96

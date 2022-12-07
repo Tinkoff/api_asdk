@@ -5,17 +5,15 @@ paths:
         - Методы приема платежей
       summary: Init
       description: |
-        Метод инициирует платежную сессию 
-        
-        Получает в ответе 1 из 2 статусов:
-        * NEW - в случае успешного сценария
-        * REJECTED - в случае неуспешного сценария
+        Метод инициирует платежную сессию
       requestBody:
         required: true
         content: 
           application/json:
             schema:
-              $ref: ../components/schemas/PaymentSession.yaml
+              oneOf:
+                - $ref: ../components/schemas/Init_FULL.yaml
+                - $ref: ../components/schemas/Init_SDK.yaml
       responses: 
         '200':
           description: OK

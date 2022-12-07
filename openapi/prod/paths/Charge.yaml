@@ -58,7 +58,9 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: ../components/schemas/PostCharge.yaml
+              oneOf:
+                - $ref: ../components/schemas/Charge_FULL.yaml
+                - $ref: ../components/schemas/Charge_SDK.yaml
       responses: 
         '200':
           description: OK

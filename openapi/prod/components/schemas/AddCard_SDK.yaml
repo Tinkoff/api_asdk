@@ -1,0 +1,44 @@
+type: object
+required: 
+  - TerminalKey
+  - CustomerKey
+  - Token
+properties: 
+  TerminalKey:
+    description: |
+      Идентификатор терминала, выдается Продавцу Банком.
+    type: string
+    example: testRegressBank
+  CustomerKey:
+    description: |
+      Идентификатор покупателя в системе Продавца
+    type: string
+    maxLength: 36
+    example: testCustomer1234
+  Token:
+    description: |
+      Подпись запроса
+    type: string
+    example: 30797e66108934dfa3d841b856fdad227c6b9c46d6a39296e02dc800d86d181e
+  CheckType:
+    description: |
+      Возможные значения:
+      * NO – сохранить карту без проверок. Rebill ID для
+      рекуррентных платежей не возвращается;
+      * HOLD – при сохранении сделать списание на 0
+      руб. RebillID возвращается для терминалов без
+      поддержки 3DS.
+      * 3DS – при сохранении карты выполнить проверку
+      3DS и выполнить списание на 0 р. 
+      Для карт МИР с 3DS v1 выполняется списание, 
+      а затем отмена на 1р. В этом случае
+      RebillID будет только для 3DS карт. Карты, не
+      поддерживающие 3DS, привязаны не будут.
+      * 3DSHOLD – при привязке карты выполняем
+      проверку, поддерживает карта 3DS или нет. Для
+      карт МИР с 3DS v1 выполняется списание, а затем
+      отмена на 1р. Для прочих карт выполняется
+      списание на 0р
+    type: string
+    default: NO
+    example: HOLD

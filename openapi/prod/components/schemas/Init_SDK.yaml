@@ -1,4 +1,5 @@
 type: object
+description: SDK
 required:
 - TerminalKey
 - Amount
@@ -149,20 +150,3 @@ properties:
     type: array
     items:
       $ref: Receipts.yaml
-  # DOESN'T USE IN ANDROID SDK
-  # Descriptor:
-  #   description: Динамический дескриптор точки
-  #   type: string
-  # IP:
-  #   description: IP-адрес покупателя
-  #   type: string
-  #   maxLength: 40
-  # Currency:
-  #   description: |
-  #     Код валюты ISO 421. Если Currency передан и
-  #     валюта разрешена для Продавца, транзакция
-  #     будет инициирована в переданной валюте. Иначе
-  #     будет использована валюта по умолчанию для
-  #     данного терминала.
-  #     В текущей версии допустимы только рубли - код 643
-  #   type: number
