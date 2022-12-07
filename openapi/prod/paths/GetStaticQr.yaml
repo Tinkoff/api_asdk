@@ -34,20 +34,12 @@ paths:
                     * QR
                   default: PAYLOAD
                   example: PAYLOAD
-                # DOESN'T USE IN ANDROID SDK
-                # Data:
-                #   description: |
-                #     Тип возвращаемых данных:
-                #     * PAYLOAD – В ответе возвращается только Payload
-                #     (по-умолчанию)
-                #     * IMAGE – В ответе возвращается SVG изображение
-                #     * QR
-                #   default: PAYLOAD
-                #   example: PAYLOAD
       responses: 
         '200':
           description: OK
           content: 
             application/json:
               schema:
-                $ref: ../components/responses/schemas/QrResponse.yaml
+                oneOf:
+                  - $ref: ../components/responses/schemas/QrResponse_FULL.yaml
+                  - $ref: ../components/responses/schemas/QrResponse_SDK.yaml
