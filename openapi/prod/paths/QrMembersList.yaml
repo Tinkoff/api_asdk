@@ -8,6 +8,8 @@ paths:
       description: |
         Описание: Список участников куда может быть осуществлен возврат платежа, совершенного
         по QR.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b> со всеми параметрами.</p><br>
       requestBody:
         required: true
         content: 

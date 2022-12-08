@@ -4,7 +4,10 @@ paths:
       tags:
         - Методы работы с привязанными картами и клиентами 
       summary: GetAddCardState
-      description: Возвращает статус привязки карты.
+      description: |
+        Возвращает статус привязки карты.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b> со всеми параметрами.</p><br>
       requestBody: 
         required: true
         content: 
@@ -93,10 +96,3 @@ paths:
                     description: |
                       Подробное описание ошибки
                     type: string
-                  # DOESN'T USE IN ANDROID SDK  
-                  # CustomerKey:
-                  #   description: |
-                  #     Идентификатор покупателя в системе Продавца
-                  #   type: string
-                  #   maxLength: 36
-                  #   example: testCustomer1234
