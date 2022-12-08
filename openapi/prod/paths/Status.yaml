@@ -6,7 +6,9 @@ paths:
           - Оплата через Tinkoff Pay Web
         summary: status
         description: |
-           Метод определения возможности проведения платежа Tinkoff Pay на терминале и устройстве
+           Метод определения возможности проведения платежа Tinkoff Pay на терминале и устройстве.
+
+           <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b> со всеми параметрами.</p><br>
         parameters:
           - in: path
             name: TerminalKey

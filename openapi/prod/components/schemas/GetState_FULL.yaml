@@ -22,9 +22,8 @@ properties:
       Подпись запроса
     type: string
     example: 7241ac8307f349afb7bb9dda760717721bbb45950b97c67289f23d8c69cc7b96
-    # DOESN'T USE IN ANDROID SDK
-    # IP:
-    #   type: string
-    #   description: |
-    #     IP-адрес клиента
-    #   example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334
+    IP:
+      type: string
+      description: |
+        IP-адрес клиента
+      example: 2011:0db8:85a3:0101:0101:8a2e:0370:7334

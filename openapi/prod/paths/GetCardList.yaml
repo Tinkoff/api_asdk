@@ -7,6 +7,9 @@ paths:
       description: |
         Возвращает список привязанных карт покупателя. 
         В том числе показывает удаленные карты.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b>  для Мобильной интеграции.<br>
+        Схему для SDK смотреть в табе <b>GetCardList_SDK</b></p><br>
       requestBody:
         required: true
         content: 

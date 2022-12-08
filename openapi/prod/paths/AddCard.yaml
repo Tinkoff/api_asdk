@@ -9,6 +9,9 @@ paths:
         В случае успешной привязки переадресует клиента на Success Add Card URL, 
         в противном случае на Fail Add Card URL. 
         Можно использовать форму банка, возможно заменить на кастомную форму.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b>  для Мобильной интеграции.<br>
+        Схему для SDK смотреть в табе <b>AddCard_SDK</b></p><br>
       requestBody:
         required: true
         content: 

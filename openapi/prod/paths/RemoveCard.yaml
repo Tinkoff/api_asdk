@@ -4,7 +4,10 @@ paths:
       tags:
         - Методы работы с привязанными картами и клиентами 
       summary: RemoveCard
-      description: Удаляет привязанную карту покупателя
+      description: |
+        Удаляет привязанную карту покупателя.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b> со всеми параметрами.</p><br>
       requestBody: 
         required: true
         content: 

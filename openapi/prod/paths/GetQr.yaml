@@ -7,6 +7,9 @@ paths:
       description: |
         Метод регистрирует QR и возвращает информацию о нем. 
         Должен быть вызван после вызова метода Init.
+
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b>  для Мобильной интеграции.<br>
+        Схему для SDK смотреть в табе <b>QrResponse_SDK</b></p><br>
       requestBody:
         required: true
         content: 

@@ -7,6 +7,8 @@ paths:
         summary: link
         description: |
            Метод получения Link для безусловного редиректа на мобильных устройствах
+
+           <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b> со всеми параметрами.</p><br>
         parameters:
           - in: path
             name: paymentId
