@@ -5,7 +5,11 @@ paths:
         - Методы приема платежей
       summary: Init
       description: |
-        Метод инициирует платежную сессию
+        Метод инициирует платежную сессию.
+        
+        <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Информация: </b>Данный метод используется в <b>SDK</b>  для Мобильной интеграции.<br>
+        Схему для SDK смотреть в табе <b>Init_SDK</b></p><br>
+
       requestBody:
         required: true
         content: 
